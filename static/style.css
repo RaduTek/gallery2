@@ -1,0 +1,416 @@
+body {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        sans-serif;
+
+    color: white;
+    background-color: #111;
+    font-size: 16px;
+    cursor: default;
+    user-select: none;
+}
+
+/* #region Loader */
+
+#loader {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    display: none;
+}
+#loader.visible {
+    display: initial;
+}
+
+#loader #loaderBody {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    padding: 10px;
+    min-width: 180px;
+    background-color: #444;
+    background-color: rgba(50, 50, 50, 0.75);
+    border-radius: 10px;
+    color: white;
+}
+
+#loader #loaderBody #spinner {
+    width: 40px;
+    height: 40px;
+    margin: 10px auto;
+    background: url("/static/images/spinner-40-light.png") no-repeat;
+    -webkit-animation: spinner-spin-frames 1.5s steps(12) infinite;
+}
+@-webkit-keyframes spinner-spin-frames {
+    100% {
+        background-position: -480px 0;
+    }
+}
+
+#loader #loaderBody #loaderText {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* #endregion */
+
+/* #region View host and transitions */
+
+#viewHost {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.view {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+.view.active {
+    display: initial;
+}
+
+.view .viewContent {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.view .viewContent.scrollable {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.view .viewContent.scrollable-all {
+    overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.view .viewTop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 44px;
+}
+.view .viewTop ~ .viewContent {
+    top: 44px;
+}
+
+.view .viewBottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 44px;
+}
+.view .viewBottom ~ .viewContent {
+    bottom: 44px;
+}
+.view .viewBottom.large {
+    height: 64px;
+}
+.view .viewBottom.large ~ .viewContent {
+    bottom: 64px;
+}
+
+.view.toLeft {
+    -webkit-animation: toLeft 0.4s forwards;
+}
+.view.toRight {
+    -webkit-animation: toRight 0.4s forwards;
+}
+.view.fromLeft {
+    -webkit-animation: fromLeft 0.4s forwards;
+}
+.view.fromRight {
+    -webkit-animation: fromRight 0.4s forwards;
+}
+
+@-webkit-keyframes toLeft {
+    from {
+        -webkit-transform: translateX(0) translateZ(0);
+    }
+    to {
+        -webkit-transform: translateX(-100%) translateZ(0);
+    }
+}
+@-webkit-keyframes toRight {
+    from {
+        -webkit-transform: translateX(0) translateZ(0);
+    }
+    to {
+        -webkit-transform: translateX(100%) translateZ(0);
+    }
+}
+@-webkit-keyframes fromLeft {
+    from {
+        -webkit-transform: translateX(-100%) translateZ(0);
+    }
+    to {
+        -webkit-transform: translateX(0) translateZ(0);
+    }
+}
+@-webkit-keyframes fromRight {
+    from {
+        -webkit-transform: translateX(100%) translateZ(0);
+    }
+    to {
+        -webkit-transform: translateX(0) translateZ(0);
+    }
+}
+
+/* #endregion */
+
+/* #region Navbar */
+
+.navbar {
+    height: 44px;
+    position: relative;
+    background-image: -webkit-linear-gradient(bottom, #202020, #404040);
+    width: 100%;
+}
+
+.navbar button {
+    height: 30px;
+    border: 1px solid #666;
+    box-shadow: inset 0 1px 0 #555;
+    border-radius: 3px;
+    padding: 0 8px;
+    margin: 6px 0 0 3px;
+    color: white;
+    font-family: inherit;
+    font-size: 14px;
+    background-color: #333;
+    background-image: -webkit-linear-gradient(bottom, #666, #888);
+}
+.navbar button:active {
+    background-color: #222;
+    background-image: -webkit-linear-gradient(bottom, #555, #777);
+    box-shadow: inset 0 1px 0 #444;
+}
+
+.navbar .navbarLeft {
+    position: absolute;
+    top: 0;
+    left: 3px;
+    bottom: 0;
+    height: 100%;
+    z-index: 10;
+}
+
+.navbar .navbarRight {
+    position: absolute;
+    top: 0;
+    right: 3px;
+    bottom: 0;
+    height: 100%;
+    z-index: 10;
+}
+
+.navbar .navbarCenter {
+    height: 100%;
+    text-align: center;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 20%;
+    right: 20%;
+    bottom: 0;
+    height: 100%;
+    z-index: 5;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.navbar .navbarTitle {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 0 -2px 0 black;
+    padding-top: 8px;
+}
+
+/* #endregion */
+
+/* #region Gallery view */
+
+.dirView {
+    overflow: hidden;
+    padding: 4px;
+}
+
+.dirView .item {
+    float: left;
+    width: 165px;
+    height: 165px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    background-color: #333;
+    margin: 2px;
+}
+
+.dirView .item::active {
+    filter: brightness(0.8);
+    -webkit-filter: brightness(0.8);
+}
+
+@media screen and (orientation: portrait) {
+    .dirView {
+        padding: 3px;
+    }
+
+    .dirView .item {
+        width: 125px;
+        height: 125px;
+        margin: 1px;
+    }
+}
+
+@media screen and (max-width: 320px) and (orientation: portrait) {
+    .dirView {
+        padding: 3px;
+    }
+
+    .dirView .item {
+        width: 102px;
+        height: 102px;
+        margin: 1px;
+    }
+}
+
+@media screen and (max-width: 568px) and (orientation: landscape) {
+    .dirView {
+        padding: 3px;
+    }
+
+    .dirView .item {
+        width: 110px;
+        height: 110px;
+        margin: 1px;
+    }
+}
+
+@media screen and (max-width: 480px) and (orientation: landscape) {
+    .dirView {
+        padding: 3px;
+    }
+
+    .dirView .item {
+        width: 116px;
+        height: 116px;
+        margin: 1px;
+    }
+}
+
+.dirView .item.dir::after,
+.dirView .item.glossy::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(/static/images/tile_gloss.png);
+    background-size: cover;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.dirView .item.video::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(/static/images/tile_film.png);
+    background-size: cover;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.dirView .item .itemName {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 4px;
+    text-shadow: 0 0 4px black;
+    font-size: 14px;
+    text-align: left;
+    z-index: 5;
+}
+
+.dirView .item .thumbnail {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.dirView .item.dir {
+    background-image: url(/static/images/icon_dir.png);
+}
+
+.dirView .item.audio {
+    background-image: url(/static/images/icon_audio.png);
+}
+
+/* #endregion */
+
+/* #region Image Viewer */
+
+#imageView {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+
+#imageView #imageViewImage {
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+}
+
+#imageView #imageViewVideo {
+    width: 100%;
+    height: 100%;
+}
+
+/* #endregion */

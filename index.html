@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Gallery" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+    <meta name="apple-touch-startup-image" sizes="768x1024" href="static/app/ipad-portrait.png" />
+    <meta name="apple-touch-startup-image" sizes="1536x2048" href="static/app/ipad-portrait@2x.png" />
+    <meta name="apple-touch-startup-image" sizes="1024x768" href="static/app/ipad-landscape.png" />
+    <meta name="apple-touch-startup-image" sizes="2048x1536" href="static/app/ipad-landscape@2x.png" />
+
+    <link rel="apple-touch-icon" sizes="57x57" href="static/app/icon.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="static/app/icon@2x.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="static/app/icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="static/app/icon-ipad@2x.png">
+
+    <title>Gallery 2.0</title>
+    <link rel="stylesheet" href="static/style.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="static/script.js"></script>
+</head>
+
+<body ontouchstart="">
+    <div id="loader">
+        <div id="loaderBody">
+            <div id="spinner"></div>
+            <div id="loaderText">Loading...</div>
+        </div>
+    </div>
+
+    <div id="viewHost"></div>
+</body>
+
+</html>
