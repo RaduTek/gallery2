@@ -259,12 +259,12 @@ body {
 
 /* #region Gallery view */
 
-.dirView {
+.galleryView {
     overflow: hidden;
     padding: 4px;
 }
 
-.dirView .item {
+.galleryView .item {
     float: left;
     width: 165px;
     height: 165px;
@@ -276,7 +276,7 @@ body {
     margin: 2px;
 }
 
-.dirView .item::active {
+.galleryView .item::active {
     filter: brightness(0.8);
     -webkit-filter: brightness(0.8);
 }
@@ -329,8 +329,8 @@ body {
     }
 }
 
-.dirView .item.dir::after,
-.dirView .item.glossy::after {
+.galleryView .item.dir::after,
+.galleryView .item.glossy::after {
     content: "";
     position: absolute;
     top: 0;
@@ -343,7 +343,7 @@ body {
     z-index: 10;
 }
 
-.dirView .item.video::after {
+.galleryView .item.video::after {
     content: "";
     position: absolute;
     top: 0;
@@ -356,7 +356,7 @@ body {
     z-index: 10;
 }
 
-.dirView .item .itemName {
+.galleryView .item .itemName {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -368,7 +368,7 @@ body {
     z-index: 5;
 }
 
-.dirView .item .thumbnail {
+.galleryView .item .thumbnail {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -380,11 +380,11 @@ body {
     z-index: 1;
 }
 
-.dirView .item.dir {
+.galleryView .item.dir {
     background-image: url(/static/images/icon_dir.png);
 }
 
-.dirView .item.audio {
+.galleryView .item.audio {
     background-image: url(/static/images/icon_audio.png);
 }
 

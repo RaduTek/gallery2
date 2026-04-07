@@ -449,11 +449,11 @@ function GalleryView(props) {
             ]
         });
 
-        var dirView = $("<div class='dirView'></div>");
+        var galleryView = $("<div class='galleryView'></div>");
 
         var view = View.create({
             topEl: navbar,
-            content: dirView,
+            content: galleryView,
             contentClass: "scrollable"
         });
         view.GalleryViewProps = props;
@@ -471,7 +471,7 @@ function GalleryView(props) {
                 item.parent = data.name;
                 item.parentDir = data;
                 var itemDiv = GalleryViewItem(item);
-                dirView.append(itemDiv);
+                galleryView.append(itemDiv);
             });
         }
 
